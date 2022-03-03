@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.btn-login {
+  @apply relative flex w-full justify-center py-2 px-4 border border-transparent text-sm font-medium text-white bg-gray-600 hover:bg-gray-700;
+}
+
+.btn-form {
+  @apply inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700;
+}
+
+.input-login {
+  @apply appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300  text-gray-900  sm:text-sm;
+}
+.table-overflow-x {
+  overflow-x: scroll;
+}

@@ -1,0 +1,17 @@
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyA4gILtrhGK4OWzfQ6WRwoDe0ezg2OqXsw",
+  authDomain: "ic-crm-demo-api.firebaseapp.com",
+  projectId: "ic-crm-demo-api",
+  storageBucket: "ic-crm-demo-api.appspot.com",
+  messagingSenderId: "600898234349",
+  appId: "1:600898234349:web:6fa0b5fe26c7f8bd66e9e4"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
