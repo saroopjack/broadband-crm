@@ -1,6 +1,6 @@
 import React from "react";
 
-const Dropdown = ({ label, optionList, onChange }) => {
+const Dropdown = ({ label, optionList, onChange, name, value }) => {
   return (
     <div>
       <label
@@ -11,7 +11,8 @@ const Dropdown = ({ label, optionList, onChange }) => {
       </label>
       <select
         id="country"
-        name="country"
+        name={name}
+        value={value}
         autoComplete="country-name"
         onChange={onChange}
         className="mt-1 block w-full py-1 px-3 border border-gray-300 bg-white rounded-md shadow-sm  sm:text-sm"

@@ -3,8 +3,11 @@ import InputBox from "../common/InputBox";
 import Button from "../common/Button";
 import { useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../redux/crm/slice";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -12,8 +15,9 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
-      .then(() => {
-        navigate("/dashboard");
+      .then((res) => {
+        dispatch(setUser(res.user.accessToken));
+        navigate("/dashboard", { replace: true });
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -21,7 +25,7 @@ const Login = () => {
         console.log("An error occured: ", errorCode, errorMessage);
       });
   };
-  console.log(auth.currentUser);
+
   return (
     <>
       <div className="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -46,6 +50,7 @@ const Login = () => {
             <div className="rounded-md shadow-sm ">
               <div>
                 <InputBox
+                  autoComplete="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   label="Email Address"

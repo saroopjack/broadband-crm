@@ -1,5 +1,10 @@
-import React, { useEffect } from "react";
+import { data } from "../data";
+
+import React from "react";
 import { Routes, Route } from "react-router-dom";
+import { firebaseConfig } from "../firebase/firebaseConfig";
+import { initializeApp } from "firebase/app";
+
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Navbar from "./Navbar";
@@ -8,31 +13,61 @@ import Leads from "./Leads";
 import Cancelled from "./Cancelled";
 import Sold from "./Sold";
 import Deleted from "./Deleted";
-import { useDispatch } from "react-redux";
-import { setLeads } from "../redux/crm/slice";
-import { data } from "../data";
-
-import { initializeApp } from "firebase/app";
-import { firebaseConfig } from "../firebase/firebaseConfig";
+import ErrorPage from "./pages/ErrorPage";
+import RequireAuth from "./RequireAuth";
+import Modal from "./Modal";
 
 const App = () => {
   initializeApp(firebaseConfig);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(setLeads(data));
-  }, [dispatch]);
   return (
     <div>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/leads" element={<Leads />} />
-        <Route path="/cancelled" element={<Cancelled />} />
-        <Route path="/sold" element={<Sold />} />
-        <Route path="/deleted" element={<Deleted />} />
+        <Route
+          path="/dashboard"
+          element={
+            <RequireAuth>
+              <Dashboard />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/leads"
+          element={
+            <RequireAuth>
+              <Leads />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/cancelled"
+          element={
+            <RequireAuth>
+              <Cancelled />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/sold"
+          element={
+            <RequireAuth>
+              <Sold />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/deleted"
+          element={
+            <RequireAuth>
+              <Deleted />
+            </RequireAuth>
+          }
+        />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
+      <Modal />
     </div>
   );
 };

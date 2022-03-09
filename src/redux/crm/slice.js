@@ -5,6 +5,7 @@ const initialState = {
   cancelled: [],
   sold: [],
   deleted: [],
+  user: null,
 };
 
 export const crmSlice = createSlice({
@@ -24,7 +25,7 @@ export const crmSlice = createSlice({
       state.deleted = action.payload;
     },
     setUser: (state, action) => {
-      state.user = action.type;
+      state.user = action.payload;
     },
   },
 });

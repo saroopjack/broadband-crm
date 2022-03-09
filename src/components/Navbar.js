@@ -2,8 +2,11 @@ import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Button from "../components/common/Button";
 import { getAuth, signOut } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { setUser } from "../redux/crm/slice";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
   const auth = getAuth();
   const navigate = useNavigate();
   let location = useLocation().pathname;
@@ -11,13 +14,15 @@ const Navbar = () => {
     e.preventDefault();
     signOut(auth)
       .then(() => {
-        console.log("user sighned out");
+        console.log("user signed out");
+        dispatch(setUser(null));
         navigate("/login");
       })
       .catch((error) => {
         console.log("error", error);
       });
   };
+
   return (
     <div className="bg-slate-700">
       <div className="py-3 px-3 sm:px-6 max-w-7xl mx-auto flex justify-between items-center ">
