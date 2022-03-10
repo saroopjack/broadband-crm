@@ -8,7 +8,7 @@ const Home = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors },
     reset,
   } = useForm();
   const handleError = (errors) => {};
@@ -40,7 +40,6 @@ const Home = () => {
       pinCode: "",
     });
   };
-  //^[a-zA-Z]+$
   const registerOptions = {
     firstName: {
       required: "FirstName is required",
@@ -69,6 +68,12 @@ const Home = () => {
       pattern: {
         value: /^[789]\d{9,9}$/g,
         message: "Please enter a valid phone number",
+      },
+    },
+    pinCode: {
+      pattern: {
+        value: /^[1-9][0-9]{5}$/g,
+        message: "Enter valid pincode",
       },
     },
   };
@@ -180,10 +185,15 @@ const Home = () => {
                   <div className="col-span-6 sm:col-span-3 lg:col-span-2">
                     <InputBox
                       register={register}
+                      required={registerOptions.pinCode}
                       name="pinCode"
                       label={"Pincode"}
                     />
-                    <div className="h-4"></div>
+                    <div className="h-4">
+                      <small className="text-red-600 text-xs ">
+                        {errors?.pinCode && errors.pinCode.message}
+                      </small>
+                    </div>
                   </div>
                 </div>
               </div>

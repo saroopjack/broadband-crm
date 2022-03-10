@@ -6,16 +6,21 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoadingIndicator, setUser } from "../../redux/crm/slice";
 import Loader from "../Loader";
+import { useForm } from "react-hook-form";
 
 const Login = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const auth = getAuth();
   const { loadingIndicator } = useSelector((state) => state.crm);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const handleLogin = (e) => {
-    e.preventDefault();
+  const handleError = (error) => {};
+  const handleLogin = (data) => {
+    const { email, password } = data;
     dispatch(setLoadingIndicator(true));
     signInWithEmailAndPassword(auth, email, password)
       .then((res) => {
@@ -24,12 +29,29 @@ const Login = () => {
         navigate("/dashboard", { replace: true });
       })
       .catch((error) => {
+        dispatch(setLoadingIndicator(false));
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log("An error occured: ", errorCode, errorMessage);
       });
   };
-
+  const registerOptions = {
+    email: {
+      required: "Email Id is required",
+      pattern: {
+        value:
+          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+        message: "Please enter a valid email",
+      },
+    },
+    password: {
+      required: "Password is required",
+      minLength: {
+        value: 6,
+        message: "Password must have at least 6 characters",
+      },
+    },
+  };
   return (
     <>
       {loadingIndicator && <Loader />}
@@ -51,36 +73,48 @@ const Login = () => {
               />
             </svg>
           </div>
-          <form className="mt-8">
-            <div className="rounded-md shadow-sm ">
+          <div className="mt-8 border rounded-md shadow-sm p-6 bg-slate-300">
+            <div className="">
               <div>
                 <InputBox
-                  autoComplete="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  name="email"
+                  register={register}
+                  required={registerOptions.email}
                   label="Email Address"
-                  type="email"
-                  required="required"
                   inputStyle="input-login"
                 />
+                <div className="h-4">
+                  <small className="text-red-600 text-xs ">
+                    {errors?.email && errors.email.message}
+                  </small>
+                </div>
               </div>
               <div className="mt-4">
                 <InputBox
-                  value={password}
+                  name="password"
+                  register={register}
+                  required={registerOptions.password}
                   label="password"
                   type="password"
-                  onChange={(e) => setPassword(e.target.value)}
-                  required="required"
                   inputStyle="input-login"
                 />
+                <div className="h-4">
+                  <small className="text-red-600 text-xs ">
+                    {errors?.password && errors.password.message}
+                  </small>
+                </div>
               </div>
             </div>
             <div className=" mt-4">
-              <Button type="submit" className="btn-login" onClick={handleLogin}>
+              <Button
+                type="submit"
+                className="btn-login"
+                onClick={handleSubmit(handleLogin, handleError)}
+              >
                 Log in
               </Button>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </>
