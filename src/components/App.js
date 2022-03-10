@@ -1,10 +1,7 @@
-import { data } from "../data";
-
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { firebaseConfig } from "../firebase/firebaseConfig";
 import { initializeApp } from "firebase/app";
-
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Navbar from "./Navbar";
@@ -15,7 +12,6 @@ import Sold from "./Sold";
 import Deleted from "./Deleted";
 import ErrorPage from "./pages/ErrorPage";
 import RequireAuth from "./RequireAuth";
-import Modal from "./Modal";
 
 const App = () => {
   initializeApp(firebaseConfig);
@@ -67,7 +63,6 @@ const App = () => {
         />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
-      <Modal />
     </div>
   );
 };

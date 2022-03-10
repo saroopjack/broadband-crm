@@ -9,7 +9,7 @@ const Table = ({ tableHeadingList, data, tableHeader }) => {
   };
   return (
     <div className="sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      <div className="table-overflow-x pt-6 ">
+      <div className="table-overflow-x py-6 ">
         <table className="min-w-full">
           <thead className="bg-gray-300">
             <tr>
@@ -42,16 +42,16 @@ const Table = ({ tableHeadingList, data, tableHeader }) => {
                     key={i}
                     className="border-b"
                   >
-                    <td className="pl-6 py-4 whitespace-nowrap">
+                    <td className="pl-6 py-3 whitespace-nowrap">
                       {`${ele[key].firstName} ${ele[key].lastName}`}
                     </td>
-                    <td className="pl-6 py-4 whitespace-nowrap">
+                    <td className="pl-6 py-3 whitespace-nowrap">
                       {ele[key].emailId}
                     </td>
-                    <td className="pl-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td className="pl-6 py-3 whitespace-nowrap text-sm text-gray-500">
                       {ele[key].phoneNum}
                     </td>
-                    <td className="pl-6 py-4  text-right text-sm font-medium">
+                    <td className="pl-6 py-3  text-right text-sm font-medium">
                       <div
                         onClick={() => editData(ele[key], key)}
                         className="text-gray-600 hover:text-gray-900 cursor-pointer"
@@ -59,7 +59,7 @@ const Table = ({ tableHeadingList, data, tableHeader }) => {
                         Edit
                       </div>
                     </td>
-                    <td className="pl-6 pr-6 py-4 text-right text-sm font-medium">
+                    <td className="pl-6 pr-6 py-3 text-right text-sm font-medium">
                       <div className="text-gray-600 hover:text-gray-900 cursor-pointer">
                         Delete
                       </div>

@@ -3,19 +3,23 @@ import InputBox from "../common/InputBox";
 import Button from "../common/Button";
 import { useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { useDispatch } from "react-redux";
-import { setUser } from "../../redux/crm/slice";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoadingIndicator, setUser } from "../../redux/crm/slice";
+import Loader from "../Loader";
 
 const Login = () => {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const auth = getAuth();
+  const { loadingIndicator } = useSelector((state) => state.crm);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const handleLogin = (e) => {
     e.preventDefault();
+    dispatch(setLoadingIndicator(true));
     signInWithEmailAndPassword(auth, email, password)
       .then((res) => {
+        dispatch(setLoadingIndicator(false));
         dispatch(setUser(res.user.accessToken));
         navigate("/dashboard", { replace: true });
       })
@@ -28,6 +32,7 @@ const Login = () => {
 
   return (
     <>
+      {loadingIndicator && <Loader />}
       <div className="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
           <div className="flex justify-center">

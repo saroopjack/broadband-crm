@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  loadingIndicator: false,
   leads: [],
   cancelled: [],
   sold: [],
@@ -27,9 +28,18 @@ export const crmSlice = createSlice({
     setUser: (state, action) => {
       state.user = action.payload;
     },
+    setLoadingIndicator: (state, action) => {
+      state.loadingIndicator = action.payload;
+    },
   },
 });
 
-export const { setLeads, setCencelled, setSold, setDeleted, setUser } =
-  crmSlice.actions;
+export const {
+  setLeads,
+  setCencelled,
+  setSold,
+  setDeleted,
+  setUser,
+  setLoadingIndicator,
+} = crmSlice.actions;
 export default crmSlice.reducer;
