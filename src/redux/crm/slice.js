@@ -2,11 +2,16 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   loadingIndicator: false,
+  tableRowModal: false,
+  editLeadModal: false,
+  deleteLeadModal: false,
   leads: [],
   cancelled: [],
   sold: [],
   deleted: [],
   user: null,
+  singleLeadData: null,
+  singleLeadKey: null,
 };
 
 export const crmSlice = createSlice({
@@ -31,6 +36,21 @@ export const crmSlice = createSlice({
     setLoadingIndicator: (state, action) => {
       state.loadingIndicator = action.payload;
     },
+    setSingleLeadData: (state, action) => {
+      state.singleLeadData = action.payload;
+    },
+    setSingleLeadKey: (state, action) => {
+      state.singleLeadKey = action.payload;
+    },
+    setTableRowModal: (state, action) => {
+      state.tableRowModal = action.payload;
+    },
+    setEditLeadModal: (state, action) => {
+      state.editLeadModal = action.payload;
+    },
+    setDeleteLeadModal: (state, action) => {
+      state.deleteLeadModal = action.payload;
+    },
   },
 });
 
@@ -41,5 +61,10 @@ export const {
   setDeleted,
   setUser,
   setLoadingIndicator,
+  setSingleLeadData,
+  setSingleLeadKey,
+  setTableRowModal,
+  setEditLeadModal,
+  setDeleteLeadModal,
 } = crmSlice.actions;
 export default crmSlice.reducer;

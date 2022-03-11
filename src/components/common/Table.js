@@ -1,11 +1,20 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { setSingleLeadData, setSingleLeadKey } from "../../redux/crm/slice";
 
-const Table = ({ tableHeadingList, data, tableHeader }) => {
+const Table = ({ tableHeadingList, data, tableHeader, tableRowClick }) => {
+  const dispatch = useDispatch();
   const editData = (obj, key) => {
-    console.log(key);
+    dispatch(setSingleLeadData(obj));
+    dispatch(setSingleLeadKey(key));
   };
-  const tableRowData = (obj, key) => {
-    console.log(obj, key);
+  // const tableRowData = (obj, key) => {
+  //   dispatch(setSingleLeadData(obj));
+  //   dispatch(setSingleLeadKey(key));
+  // };
+  const deleteData = (obj, key) => {
+    dispatch(setSingleLeadData(obj));
+    dispatch(setSingleLeadKey(key));
   };
   return (
     <div className="sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -38,7 +47,7 @@ const Table = ({ tableHeadingList, data, tableHeader }) => {
               const tr = keys.map((key, i) => {
                 return (
                   <tr
-                    onClick={() => tableRowData(ele[key], key)}
+                    onClick={() => tableRowClick(ele[key], key)}
                     key={i}
                     className="border-b"
                   >
@@ -60,7 +69,10 @@ const Table = ({ tableHeadingList, data, tableHeader }) => {
                       </div>
                     </td>
                     <td className="pl-6 pr-6 py-3 text-right text-sm font-medium">
-                      <div className="text-gray-600 hover:text-gray-900 cursor-pointer">
+                      <div
+                        onClick={() => deleteData(ele[key], key)}
+                        className="text-gray-600 hover:text-gray-900 cursor-pointer"
+                      >
                         Delete
                       </div>
                     </td>

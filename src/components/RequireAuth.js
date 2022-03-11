@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
 const RequireAuth = ({ children }) => {
-  const { user } = useSelector((state) => state.crm);
+  const { user,leads } = useSelector((state) => state.crm);
   if (!user) {
     return <Navigate to="/login" />;
   }

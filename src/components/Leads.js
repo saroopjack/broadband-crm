@@ -1,9 +1,16 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setLeads, setLoadingIndicator } from "../redux/crm/slice";
+import {
+  setLeads,
+  setLoadingIndicator,
+  setSingleLeadData,
+  setSingleLeadKey,
+  setTableRowModal,
+} from "../redux/crm/slice";
 import Table from "./common/Table";
 import Button from "../components/common/Button";
 import Loader from "../components/Loader";
+import LeadCard from "./LeadCard";
 
 const Leads = () => {
   const dispatch = useDispatch();
@@ -24,8 +31,15 @@ const Leads = () => {
     fetchData();
   }, []);
   const tableHeadingList = ["Name", "E mail", "Phone"];
+  const handleRowData = (obj, key) => {
+    // console.log(obj, key);
+    dispatch(setSingleLeadData(obj));
+    dispatch(setSingleLeadKey(key));
+    dispatch(setTableRowModal(true));
+  };
   return (
     <>
+      <LeadCard />
       {loadingIndicator && <Loader />}
       <div className="min-h-full">
         <header className="bg-white shadow">
@@ -43,6 +57,7 @@ const Leads = () => {
           <Table
             data={leads}
             tableHeader="Leads"
+            tableRowClick={handleRowData}
             tableHeadingList={tableHeadingList}
           />
         </main>

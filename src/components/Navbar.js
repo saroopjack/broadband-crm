@@ -48,7 +48,7 @@ const Navbar = () => {
             location === "/" || location === "/login" ? "hidden" : "block"
           }`}
         >
-          <ul className="flex gap-x-4 text-white">
+          <ul className="flex flex-wrap gap-x-4 text-white">
             <Link to={"dashboard"} className="hover:scale-110 cursor-pointer">
               Dashboard
             </Link>
@@ -76,7 +76,7 @@ const Navbar = () => {
             onClick={handleSignOut}
             className={"font-bold text-white hover:text-gray-900"}
           >
-            Sign Out
+            SignOut
           </Button>
         </div>
       </div>
