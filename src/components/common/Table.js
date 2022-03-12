@@ -2,16 +2,12 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { setSingleLeadData, setSingleLeadKey } from "../../redux/crm/slice";
 
-const Table = ({ tableHeadingList, data, tableHeader, tableRowClick }) => {
+const Table = ({ tableHeadingList, data, tableRowClick }) => {
   const dispatch = useDispatch();
   const editData = (obj, key) => {
     dispatch(setSingleLeadData(obj));
     dispatch(setSingleLeadKey(key));
   };
-  // const tableRowData = (obj, key) => {
-  //   dispatch(setSingleLeadData(obj));
-  //   dispatch(setSingleLeadKey(key));
-  // };
   const deleteData = (obj, key) => {
     dispatch(setSingleLeadData(obj));
     dispatch(setSingleLeadKey(key));
@@ -34,6 +30,9 @@ const Table = ({ tableHeadingList, data, tableHeader, tableRowClick }) => {
                 );
               })}
               <th className="relative px-6 py-3 ">
+                <span className="hidden">view</span>
+              </th>
+              <th className="relative px-6 py-3 ">
                 <span className="hidden">Edit</span>
               </th>
               <th className="relative px-6 py-3 ">
@@ -46,11 +45,7 @@ const Table = ({ tableHeadingList, data, tableHeader, tableRowClick }) => {
               const keys = Object.keys(ele);
               const tr = keys.map((key, i) => {
                 return (
-                  <tr
-                    onClick={() => tableRowClick(ele[key], key)}
-                    key={i}
-                    className="border-b"
-                  >
+                  <tr key={i} className="border-b">
                     <td className="pl-6 py-3 whitespace-nowrap">
                       {`${ele[key].firstName} ${ele[key].lastName}`}
                     </td>
@@ -59,6 +54,14 @@ const Table = ({ tableHeadingList, data, tableHeader, tableRowClick }) => {
                     </td>
                     <td className="pl-6 py-3 whitespace-nowrap text-sm text-gray-500">
                       {ele[key].phoneNum}
+                    </td>
+                    <td className="pl-6 py-3  text-right text-sm font-medium">
+                      <div
+                        onClick={() => tableRowClick(ele[key], key)}
+                        className="text-gray-600 hover:text-gray-900 cursor-pointer"
+                      >
+                        view
+                      </div>
                     </td>
                     <td className="pl-6 py-3  text-right text-sm font-medium">
                       <div

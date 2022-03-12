@@ -32,7 +32,6 @@ const Leads = () => {
   }, []);
   const tableHeadingList = ["Name", "E mail", "Phone"];
   const handleRowData = (obj, key) => {
-    // console.log(obj, key);
     dispatch(setSingleLeadData(obj));
     dispatch(setSingleLeadKey(key));
     dispatch(setTableRowModal(true));
