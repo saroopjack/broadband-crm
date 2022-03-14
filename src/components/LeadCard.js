@@ -48,14 +48,17 @@ const LeadCard = () => {
           </div>
         </div>
         <div className="py-4 grid gap-3">
-          {Object.keys(singleLeadData).map((key, i) => {
-            return (
-              <div key={i} className="grid grid-cols-2 gap-3">
-                <div className="w-full break-all">{key}</div>
-                <div className="w-full break-all ">: {singleLeadData[key]}</div>
-              </div>
-            );
-          })}
+          {singleLeadData &&
+            Object.keys(singleLeadData).map((key, i) => {
+              return (
+                <div key={i} className="grid grid-cols-2 gap-3">
+                  <div className="w-full break-all">{key}</div>
+                  <div className="w-full break-all ">
+                    : {singleLeadData[key]}
+                  </div>
+                </div>
+              );
+            })}
         </div>
       </div>
     </div>

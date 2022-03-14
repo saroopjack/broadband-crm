@@ -29,13 +29,13 @@ const Table = ({ tableHeadingList, data, tableRowClick }) => {
                   </th>
                 );
               })}
-              <th className="relative px-6 py-3 ">
+              <th className=" px-6 py-3 ">
                 <span className="hidden">view</span>
               </th>
-              <th className="relative px-6 py-3 ">
+              <th className=" px-6 py-3 ">
                 <span className="hidden">Edit</span>
               </th>
-              <th className="relative px-6 py-3 ">
+              <th className=" px-6 py-3 ">
                 <span className="hidden">Delete</span>
               </th>
             </tr>
