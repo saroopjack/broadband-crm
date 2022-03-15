@@ -1,17 +1,12 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { setSingleLeadData, setSingleLeadKey } from "../../redux/crm/slice";
 
-const Table = ({ tableHeadingList, data, tableRowClick }) => {
-  const dispatch = useDispatch();
-  const editData = (obj, key) => {
-    dispatch(setSingleLeadData(obj));
-    dispatch(setSingleLeadKey(key));
-  };
-  const deleteData = (obj, key) => {
-    dispatch(setSingleLeadData(obj));
-    dispatch(setSingleLeadKey(key));
-  };
+const Table = ({
+  tableHeadingList,
+  data,
+  tableRowClick,
+  editData,
+  deleteData,
+}) => {
   return (
     <div className="sm:px-6 lg:px-8 max-w-7xl mx-auto">
       <div className="table-overflow-x py-6 ">

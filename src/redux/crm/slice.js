@@ -12,6 +12,7 @@ const initialState = {
   user: null,
   singleLeadData: null,
   singleLeadKey: null,
+  manualLeadfetch: false,
 };
 
 export const crmSlice = createSlice({
@@ -51,6 +52,9 @@ export const crmSlice = createSlice({
     setDeleteLeadModal: (state, action) => {
       state.deleteLeadModal = action.payload;
     },
+    setManualLeadfetch: (state, action) => {
+      state.manualLeadfetch = action.payload;
+    },
   },
 });
 
@@ -66,5 +70,6 @@ export const {
   setTableRowModal,
   setEditLeadModal,
   setDeleteLeadModal,
+  setManualLeadfetch,
 } = crmSlice.actions;
 export default crmSlice.reducer;

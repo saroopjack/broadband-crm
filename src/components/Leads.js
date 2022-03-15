@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
+  setDeleteLeadModal,
+  setEditLeadModal,
   setLeads,
   setLoadingIndicator,
   setSingleLeadData,
@@ -11,11 +13,14 @@ import Table from "./common/Table";
 import Button from "../components/common/Button";
 import Loader from "../components/Loader";
 import LeadCard from "./LeadCard";
+import LeadDelete from "./LeadDelete";
+import LeadEdit from "./LeadEdit";
 
 const Leads = () => {
   const dispatch = useDispatch();
-  const { leads, loadingIndicator } = useSelector((state) => state.crm);
-
+  const { leads, loadingIndicator, manualLeadfetch } = useSelector(
+    (state) => state.crm
+  );
   const fetchData = async () => {
     dispatch(setLoadingIndicator(true));
     const res = await fetch(
@@ -29,16 +34,19 @@ const Leads = () => {
   };
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [manualLeadfetch]);
+
   const tableHeadingList = ["Name", "E mail", "Phone"];
-  const handleRowData = (obj, key) => {
+  const tableRowModalHandler = (obj, key, modalState) => {
     dispatch(setSingleLeadData(obj));
     dispatch(setSingleLeadKey(key));
-    dispatch(setTableRowModal(true));
+    dispatch(modalState(true));
   };
   return (
     <>
       <LeadCard />
+      <LeadDelete />
+      <LeadEdit />
       {loadingIndicator && <Loader />}
       <div className="min-h-full">
         <header className="bg-white shadow">
@@ -56,7 +64,15 @@ const Leads = () => {
           <Table
             data={leads}
             tableHeader="Leads"
-            tableRowClick={handleRowData}
+            tableRowClick={(obj, key) =>
+              tableRowModalHandler(obj, key, setTableRowModal)
+            }
+            deleteData={(obj, key) =>
+              tableRowModalHandler(obj, key, setDeleteLeadModal)
+            }
+            editData={(obj, key) =>
+              tableRowModalHandler(obj, key, setEditLeadModal)
+            }
             tableHeadingList={tableHeadingList}
           />
         </main>

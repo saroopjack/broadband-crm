@@ -1,7 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Table from "./common/Table";
 
 const Deleted = () => {
+  const [data, setData] = useState();
+  const fetchData = async () => {
+    const res = await fetch(
+      "https://ic-crm-demo-api-default-rtdb.firebaseio.com/deletedLeads.json"
+    );
+    const data = await res.json();
+    if (res) {
+      setData([data]);
+    }
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
   const tableHeadingList = ["Name", "E mail", "Phone"];
   return (
     <div className="min-h-full">
@@ -11,7 +24,11 @@ const Deleted = () => {
         </div>
       </header>
       <main>
-        <Table tableHeader="Deleted" tableHeadingList={tableHeadingList} />
+        <Table
+          data={data}
+          tableHeader="Deleted"
+          tableHeadingList={tableHeadingList}
+        />
       </main>
     </div>
   );

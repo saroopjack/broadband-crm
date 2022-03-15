@@ -7,6 +7,7 @@ const InputBox = ({
   label,
   onChange,
   value,
+  defaultValue,
   type,
   required,
   inputStyle,
@@ -24,6 +25,7 @@ const InputBox = ({
         type={type}
         value={value}
         onChange={onChange}
+        defaultValue={defaultValue}
         {...register(name, required)}
         className={`${
           inputStyle ??
