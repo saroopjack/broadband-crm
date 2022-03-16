@@ -22,7 +22,7 @@ export const crmSlice = createSlice({
     setLeads: (state, action) => {
       state.leads = action.payload;
     },
-    setCencelled: (state, action) => {
+    setCancelled: (state, action) => {
       state.cancelled = action.payload;
     },
     setSold: (state, action) => {
@@ -60,7 +60,7 @@ export const crmSlice = createSlice({
 
 export const {
   setLeads,
-  setCencelled,
+  setCancelled,
   setSold,
   setDeleted,
   setUser,

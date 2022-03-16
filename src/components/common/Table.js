@@ -1,4 +1,5 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 
 const Table = ({
   tableHeadingList,
@@ -7,9 +8,11 @@ const Table = ({
   editData,
   deleteData,
 }) => {
+  let location = useLocation().pathname;
+
   return (
-    <div className="sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      <div className="table-overflow-x py-6 ">
+    <div className="sm:px-6 py-6 lg:px-8 max-w-7xl mx-auto">
+      <div className="table-overflow-x">
         <table className="min-w-full">
           <thead className="bg-gray-300">
             <tr>
@@ -24,13 +27,25 @@ const Table = ({
                   </th>
                 );
               })}
-              <th className=" px-6 py-3 ">
+              <th
+                className={`${
+                  location === "/leads" ? "" : "hidden"
+                } px-6 py-3 `}
+              >
                 <span className="hidden">view</span>
               </th>
-              <th className=" px-6 py-3 ">
+              <th
+                className={`${
+                  location === "/leads" ? "" : "hidden"
+                } px-6 py-3 `}
+              >
                 <span className="hidden">Edit</span>
               </th>
-              <th className=" px-6 py-3 ">
+              <th
+                className={`${
+                  location === "/leads" ? "" : "hidden"
+                } px-6 py-3 `}
+              >
                 <span className="hidden">Delete</span>
               </th>
             </tr>
@@ -50,7 +65,11 @@ const Table = ({
                     <td className="pl-6 py-3 whitespace-nowrap text-sm text-gray-500">
                       {ele[key].phoneNum}
                     </td>
-                    <td className="pl-6 py-3  text-right text-sm font-medium">
+                    <td
+                      className={`${
+                        location === "/leads" ? "" : "hidden"
+                      } pl-6 py-3  text-right text-sm font-medium`}
+                    >
                       <div
                         onClick={() => tableRowClick(ele[key], key)}
                         className="text-gray-600 hover:text-gray-900 cursor-pointer"
@@ -58,7 +77,11 @@ const Table = ({
                         view
                       </div>
                     </td>
-                    <td className="pl-6 py-3  text-right text-sm font-medium">
+                    <td
+                      className={`${
+                        location === "/leads" ? "" : "hidden"
+                      } pl-6 py-3  text-right text-sm font-medium`}
+                    >
                       <div
                         onClick={() => editData(ele[key], key)}
                         className="text-gray-600 hover:text-gray-900 cursor-pointer"
@@ -66,7 +89,11 @@ const Table = ({
                         Edit
                       </div>
                     </td>
-                    <td className="pl-6 pr-6 py-3 text-right text-sm font-medium">
+                    <td
+                      className={`${
+                        location === "/leads" ? "" : "hidden"
+                      } pl-6 py-3 pr-6 text-right text-sm font-medium`}
+                    >
                       <div
                         onClick={() => deleteData(ele[key], key)}
                         className="text-gray-600 hover:text-gray-900 cursor-pointer"
