@@ -47,9 +47,6 @@ const Dashboard = () => {
 
   useEffect(() => {
     fetchAllData();
-    return () => {
-      fetchAllData();
-    };
   }, []);
   return (
     <>
@@ -69,13 +66,13 @@ const Dashboard = () => {
           </div>
           <div className="col-span-6 sm:col-span-3 ">
             <DashBoardCard
-              name="Leads Sold"
+              name="Leads Cancelled"
               activeCount={allData && Object.keys(allData.cancelled).length}
             />
           </div>
           <div className="col-span-6 sm:col-span-3 ">
             <DashBoardCard
-              name="Leads Cancelled"
+              name="Leads Sold"
               activeCount={allData && Object.keys(allData.sold).length}
             />
           </div>

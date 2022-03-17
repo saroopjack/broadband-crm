@@ -33,7 +33,7 @@ const Home = () => {
       lastName: "",
       emailId: "",
       phoneNum: "",
-      country: "",
+      country: "india",
       city: "",
       state: "",
       streetAddress: "",
