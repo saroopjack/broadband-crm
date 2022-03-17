@@ -17,7 +17,7 @@ import LeadDelete from "./LeadDelete";
 import LeadEdit from "./LeadEdit";
 
 const Leads = () => {
-  const [searchTerm, setSearchTerm] = useState();
+  const [searchTerm, setSearchTerm] = useState("");
   const dispatch = useDispatch();
   const { leads, loadingIndicator, manualLeadfetch } = useSelector(
     (state) => state.crm
@@ -47,7 +47,7 @@ const Leads = () => {
     const keys = Object.keys(obj).filter((key) =>
       `${obj[key].firstName} ${obj[key].lastName}`
         .toLowerCase()
-        .includes(searchTerm?.toLowerCase())
+        .includes(searchTerm.toLowerCase())
     );
     const reduced = keys.reduce((acc, key) => {
       if (!acc[key]) {
