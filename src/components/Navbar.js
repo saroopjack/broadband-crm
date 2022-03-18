@@ -1,15 +1,15 @@
 import React from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/common/Button";
 import { getAuth, signOut } from "firebase/auth";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../redux/crm/slice";
 
 const Navbar = () => {
+  const { user } = useSelector((state) => state.crm);
   const dispatch = useDispatch();
   const auth = getAuth();
   const navigate = useNavigate();
-  let location = useLocation().pathname;
   const handleSignOut = (e) => {
     e.preventDefault();
     signOut(auth)
@@ -42,12 +42,7 @@ const Navbar = () => {
             />
           </svg>
         </div>
-        <div
-          id="navItems"
-          className={`${
-            location === "/" || location === "/login" ? "hidden" : "block"
-          }`}
-        >
+        <div id="navItems" className={`${user ? "block" : "hidden"}`}>
           <ul className="flex flex-wrap gap-x-4 text-white">
             <Link to={"dashboard"} className="hover:scale-110 cursor-pointer">
               Dashboard
@@ -66,12 +61,7 @@ const Navbar = () => {
             </Link>
           </ul>
         </div>
-        <div
-          id="admin"
-          className={`${
-            location === "/" || location === "/login" ? "hidden" : "block"
-          }`}
-        >
+        <div id="admin" className={`${user ? "block" : "hidden"}`}>
           <Button
             onClick={handleSignOut}
             className={"font-bold text-white hover:text-gray-900"}

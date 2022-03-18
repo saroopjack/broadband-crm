@@ -5,6 +5,7 @@ const initialState = {
   tableRowModal: false,
   editLeadModal: false,
   deleteLeadModal: false,
+  addLeadModal: false,
   leads: [],
   cancelled: [],
   sold: [],
@@ -52,6 +53,9 @@ export const crmSlice = createSlice({
     setDeleteLeadModal: (state, action) => {
       state.deleteLeadModal = action.payload;
     },
+    setAddLeadModal: (state, action) => {
+      state.addLeadModal = action.payload;
+    },
     setManualLeadfetch: (state, action) => {
       state.manualLeadfetch = action.payload;
     },
@@ -71,5 +75,6 @@ export const {
   setEditLeadModal,
   setDeleteLeadModal,
   setManualLeadfetch,
+  setAddLeadModal,
 } = crmSlice.actions;
 export default crmSlice.reducer;

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
+  setAddLeadModal,
   setDeleteLeadModal,
   setEditLeadModal,
   setLeads,
@@ -15,6 +16,7 @@ import Loader from "../components/Loader";
 import LeadCard from "./LeadCard";
 import LeadDelete from "./LeadDelete";
 import LeadEdit from "./LeadEdit";
+import AddLead from "./AddLead";
 
 const Leads = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -65,6 +67,7 @@ const Leads = () => {
       <LeadCard />
       <LeadDelete />
       <LeadEdit />
+      <AddLead />
       {loadingIndicator && <Loader />}
       <div className="min-h-full">
         <header className="bg-white shadow">
@@ -82,7 +85,12 @@ const Leads = () => {
               <Button onClick={fetchData} className="btn-form">
                 Refresh
               </Button>
-              <Button className="btn-form">Add</Button>
+              <Button
+                onClick={() => dispatch(setAddLeadModal(true))}
+                className="btn-form"
+              >
+                Add
+              </Button>
             </div>
           </div>
         </header>
