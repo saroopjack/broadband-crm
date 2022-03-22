@@ -30,7 +30,10 @@ const LeadCard = () => {
       >
         <div className="flex justify-between">
           <h1 className="text-lg font-medium">Lead Detail</h1>
-          <div onClick={() => dispatch(setTableRowModal(false))}>
+          <div
+            className="cursor-pointer"
+            onClick={() => dispatch(setTableRowModal(false))}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"

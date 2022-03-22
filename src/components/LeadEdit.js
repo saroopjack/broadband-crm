@@ -149,7 +149,7 @@ const LeadEdit = () => {
       >
         <div
           onClick={() => dispatch(setEditLeadModal(false))}
-          className="absolute w-6 h-6 top-2 right-2 bg-gray-50 rounded-full hover:bg-gray-200 hover:shadow-inner"
+          className="cursor-pointer absolute w-6 h-6 top-2 right-2 bg-gray-50 rounded-full hover:bg-gray-200 hover:shadow-inner"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
