@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setDeleteLeadModal, setManualLeadfetch } from "../redux/crm/slice";
+import { setDeleteLeadModal, setManualLeadfetch } from "../redux/slices/crm";
 import Button from "./common/Button";
 
 const LeadDelete = () => {

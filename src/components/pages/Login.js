@@ -4,7 +4,7 @@ import Button from "../common/Button";
 import { useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
-import { setLoadingIndicator, setUser } from "../../redux/crm/slice";
+import { setLoadingIndicator, setUser } from "../../redux/slices/crm";
 import Loader from "../Loader";
 import { useForm } from "react-hook-form";
 

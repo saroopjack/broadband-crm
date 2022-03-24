@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Table from "./common/Table";
 import { useDispatch, useSelector } from "react-redux";
-import { setCancelled, setLoadingIndicator } from "../redux/crm/slice";
+import { setCancelled, setLoadingIndicator } from "../redux/slices/crm";
 import Loader from "./Loader";
 
 const Cancelled = () => {

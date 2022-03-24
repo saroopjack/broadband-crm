@@ -24,3 +24,9 @@
 .overflowYscroll {
   overflow-y: scroll;
 }
+.pagination-btn {
+  @apply px-2 py-1 mx-1 rounded-sm  text-white;
+}
+.pagination-next-prev-btn {
+  @apply font-semibold;
+}

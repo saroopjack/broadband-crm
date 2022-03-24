@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import DashBoardCard from "./common/DashBoardCard";
 import Loader from "./Loader";
-import { setLoadingIndicator } from "../redux/crm/slice";
+import { setLoadingIndicator } from "../redux/slices/crm";
 
 const Dashboard = () => {
   const { loadingIndicator } = useSelector((state) => state.crm);

@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/common/Button";
 import { getAuth, signOut } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
-import { setUser } from "../redux/crm/slice";
+import { setUser } from "../redux/slices/crm";
 
 const Navbar = () => {
   const { user } = useSelector((state) => state.crm);

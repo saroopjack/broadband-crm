@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Table from "./common/Table";
 import { useDispatch, useSelector } from "react-redux";
-import { setSold, setLoadingIndicator } from "../redux/crm/slice";
+import { setSold, setLoadingIndicator } from "../redux/slices/crm";
 import Loader from "./Loader";
 
 const Sold = () => {

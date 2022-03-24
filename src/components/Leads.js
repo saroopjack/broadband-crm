@@ -9,7 +9,7 @@ import {
   setSingleLeadData,
   setSingleLeadKey,
   setTableRowModal,
-} from "../redux/crm/slice";
+} from "../redux/slices/crm";
 import Table from "./common/Table";
 import Button from "../components/common/Button";
 import Loader from "../components/Loader";

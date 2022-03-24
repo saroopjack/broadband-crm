@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Table from "./common/Table";
 import { useDispatch, useSelector } from "react-redux";
-import { setDeleted, setLoadingIndicator } from "../redux/crm/slice";
+import { setDeleted, setLoadingIndicator } from "../redux/slices/crm";
 import Loader from "./Loader";
 
 const Deleted = () => {

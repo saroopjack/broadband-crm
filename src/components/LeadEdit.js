@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setEditLeadModal, setManualLeadfetch } from "../redux/crm/slice";
+import { setEditLeadModal, setManualLeadfetch } from "../redux/slices/crm";
 import InputBox from "./common/InputBox";
 import Dropdown from "./common/Dropdown";
 import Button from "./common/Button";

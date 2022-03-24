@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setTableRowModal } from "../redux/crm/slice";
+import { setTableRowModal } from "../redux/slices/crm";
 
 const LeadCard = () => {
   const { singleLeadData, tableRowModal } = useSelector((state) => state.crm);
