@@ -9,6 +9,7 @@ import {
   setSingleLeadData,
   setSingleLeadKey,
   setTableRowModal,
+  setMultiLeadModal,
 } from "../redux/slices/crm";
 import Table from "./common/Table";
 import Button from "../components/common/Button";
@@ -17,6 +18,7 @@ import LeadCard from "./LeadCard";
 import LeadDelete from "./LeadDelete";
 import LeadEdit from "./LeadEdit";
 import AddLead from "./AddLead";
+import MultiLeadCard from "./MultiLeadCard";
 
 const Leads = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -68,6 +70,7 @@ const Leads = () => {
       <LeadDelete />
       <LeadEdit />
       <AddLead />
+      <MultiLeadCard />
       {loadingIndicator && <Loader />}
       <div className="min-h-full">
         <header className="bg-white shadow">
@@ -82,6 +85,12 @@ const Leads = () => {
               />
             </div>
             <div className="flex items-center gap-x-2">
+              <Button
+                onClick={() => dispatch(setMultiLeadModal(true))}
+                className="btn-form"
+              >
+                Get Multiple
+              </Button>
               <Button onClick={fetchData} className="btn-form">
                 Refresh
               </Button>

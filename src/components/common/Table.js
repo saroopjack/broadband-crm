@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import Button from "./Button";
-
+import { setCheckedArr } from "../../redux/slices/crm";
 const Table = ({
   tableHeadingList,
   data,
@@ -9,10 +10,15 @@ const Table = ({
   editData,
   deleteData,
 }) => {
+  const dispatch = useDispatch();
+  const { checkedArr } = useSelector((state) => state.crm);
   let location = useLocation().pathname;
   const [newData, setNewData] = useState();
   const [page, setPage] = useState(0);
+  const [masterCheck, setMasterCheck] = useState(false);
+  const [checkedArray, setCheckedArray] = useState([]);
   const [singlePageData, setSinglePageData] = useState([]);
+  const [singlePageDataLength, setSinglePageDataLength] = useState(0);
   const pagination = (data) => {
     const dataObj = data[0];
     const itemsPerPage = 4;
@@ -45,7 +51,6 @@ const Table = ({
       setNewData(pagination(data));
     }
   }, [data]);
-  console.log(newData);
   const handlePaginateBtn = (index) => {
     setPage(index);
   };
@@ -67,7 +72,33 @@ const Table = ({
       return prevPage;
     });
   };
-
+  const handleCheckbox = (key) => {
+    if (checkedArray.indexOf(key) === -1) {
+      setCheckedArray((prevArr) => [...prevArr, key]);
+    }
+    if (checkedArray.indexOf(key) !== -1) {
+      setCheckedArray(checkedArray.filter((arrKey) => arrKey !== key));
+    }
+  };
+  useEffect(() => {
+    if (!masterCheck) {
+      setCheckedArray([]);
+    } else {
+      setCheckedArray(Object.keys(singlePageData[0]));
+    }
+  }, [masterCheck]);
+  useEffect(() => {
+    if (singlePageData.length !== 0) {
+      const keys = Object.keys(singlePageData[0]);
+      if (keys.length !== checkedArray.length) {
+        setMasterCheck(false);
+      }
+      setSinglePageDataLength(keys);
+    }
+  }, [singlePageData]);
+  useEffect(() => {
+    dispatch(setCheckedArr(checkedArray));
+  }, [checkedArray]);
   return (
     <>
       <div className="sm:px-6 py-6 lg:px-8 max-w-7xl mx-auto">
@@ -75,12 +106,20 @@ const Table = ({
           <table className="min-w-full">
             <thead className="bg-gray-300">
               <tr>
+                <th className="px-1">
+                  <input
+                    type="checkbox"
+                    checked={
+                      checkedArray.length === singlePageDataLength.length
+                    }
+                    onChange={() => setMasterCheck(!masterCheck)}
+                  />
+                </th>
                 {tableHeadingList?.map((heading, i) => {
                   return (
                     <th
                       key={i}
-                      scope="col"
-                      className="pl-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider"
+                      className="px-3 py-3 text-left text-xs font-medium text-gray-700 uppercase"
                     >
                       {heading}
                     </th>
@@ -89,21 +128,21 @@ const Table = ({
                 <th
                   className={`${
                     location === "/leads" ? "" : "hidden"
-                  } px-6 py-3 `}
+                  } px-3 py-3 `}
                 >
                   <span className="hidden">view</span>
                 </th>
                 <th
                   className={`${
                     location === "/leads" ? "" : "hidden"
-                  } px-6 py-3 `}
+                  } px-3 py-3 `}
                 >
                   <span className="hidden">Edit</span>
                 </th>
                 <th
                   className={`${
                     location === "/leads" ? "" : "hidden"
-                  } px-6 py-3 `}
+                  } px-3 py-3 `}
                 >
                   <span className="hidden">Delete</span>
                 </th>
@@ -115,19 +154,29 @@ const Table = ({
                 const tr = keys.map((key, i) => {
                   return (
                     <tr key={i} className="border-b">
-                      <td className="pl-6 py-3 whitespace-nowrap">
+                      <td>
+                        <div className="flex justify-center items-center">
+                          <input
+                            type="checkbox"
+                            // value={key}
+                            checked={checkedArray.indexOf(key) !== -1}
+                            onChange={() => handleCheckbox(key)}
+                          />
+                        </div>
+                      </td>
+                      <td className="px-3 py-3 whitespace-nowrap">
                         {`${ele[key].firstName} ${ele[key].lastName}`}
                       </td>
-                      <td className="pl-6 py-3 whitespace-nowrap">
+                      <td className="px-3 py-3 whitespace-nowrap">
                         {ele[key].emailId}
                       </td>
-                      <td className="pl-6 py-3 whitespace-nowrap text-sm text-gray-500">
+                      <td className="px-3 py-3 whitespace-nowrap text-sm text-gray-500">
                         {ele[key].phoneNum}
                       </td>
                       <td
                         className={`${
                           location === "/leads" ? "" : "hidden"
-                        } pl-6 py-3  text-right text-sm font-medium`}
+                        } px-3 py-3  text-right text-sm font-medium`}
                       >
                         <div
                           onClick={() => tableRowClick(ele[key], key)}
@@ -139,7 +188,7 @@ const Table = ({
                       <td
                         className={`${
                           location === "/leads" ? "" : "hidden"
-                        } pl-6 py-3  text-right text-sm font-medium`}
+                        } px-3 py-3  text-right text-sm font-medium`}
                       >
                         <div
                           onClick={() => editData(ele[key], key)}
@@ -151,7 +200,7 @@ const Table = ({
                       <td
                         className={`${
                           location === "/leads" ? "" : "hidden"
-                        } pl-6 py-3 pr-6 text-right text-sm font-medium`}
+                        } px-3 py-3 pr-6 text-right text-sm font-medium`}
                       >
                         <div
                           onClick={() => deleteData(ele[key], key)}
@@ -172,7 +221,7 @@ const Table = ({
               <Button className="pagination-next-prev-btn" onClick={prevPage}>
                 Prev
               </Button>
-              {newData?.map((obj, index) => {
+              {newData?.map((_, index) => {
                 return (
                   <Button
                     onClick={() => handlePaginateBtn(index)}

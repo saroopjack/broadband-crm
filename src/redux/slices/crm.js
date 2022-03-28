@@ -6,6 +6,7 @@ const initialState = {
   editLeadModal: false,
   deleteLeadModal: false,
   addLeadModal: false,
+  multiLeadModal: false,
   leads: [],
   cancelled: [],
   sold: [],
@@ -14,6 +15,7 @@ const initialState = {
   singleLeadData: null,
   singleLeadKey: null,
   manualLeadfetch: false,
+  checkedArr: [],
 };
 
 export const crmSlice = createSlice({
@@ -56,8 +58,14 @@ export const crmSlice = createSlice({
     setAddLeadModal: (state, action) => {
       state.addLeadModal = action.payload;
     },
+    setMultiLeadModal: (state, action) => {
+      state.multiLeadModal = action.payload;
+    },
     setManualLeadfetch: (state, action) => {
       state.manualLeadfetch = action.payload;
+    },
+    setCheckedArr: (state, action) => {
+      state.checkedArr = action.payload;
     },
   },
 });
@@ -76,5 +84,7 @@ export const {
   setDeleteLeadModal,
   setManualLeadfetch,
   setAddLeadModal,
+  setCheckedArr,
+  setMultiLeadModal,
 } = crmSlice.actions;
 export default crmSlice.reducer;
